@@ -11,7 +11,7 @@
     regexp: "(?P<start>'{{ item.key }}'\\s*=>\\s*'?)(?P<current_value>.*?)(?P<end>'?,)"
     replace: "\\g<start>{{ item.value }}\\g<end>"
   with_dict:
-  - debug: "{{ octobercms_app_debug | default(false) | ternary('true', 'false') }}"
+  - debug: "{{ octobercms_app_debug | ternary('true', 'false') }}"
   - url: "{{ octobercms_app_url | default('\\g<current_value>') }}"
   when: not octobercms_use_dotenv_config
 

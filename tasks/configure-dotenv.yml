@@ -14,7 +14,7 @@
     line: "\\g<start>{{ item.value }}"
     backrefs: yes
   with_dict:
-  - app_debug: "{{ octobercms_app_debug | default(false) | ternary('true', 'false') }}"
+  - app_debug: "{{ octobercms_app_debug | ternary('true', 'false') }}"
   - app_url: "{{ octobercms_app_url | default('\\g<current_value>') }}"
   - db_connection: "{{ octobercms_database_connection | default('\\g<current_value>') }}"
   - db_host: "{{ octobercms_database_host | default('\\g<current_value>') }}"

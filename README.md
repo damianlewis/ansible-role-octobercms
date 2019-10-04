@@ -21,13 +21,31 @@ Installation settings.
 
 ```yaml
 octobercms_app_name: October CMS
-octobercms_app_debug: no
 octobercms_app_url: http://localhost
+octobercms_app_debug: no
 ```
 Optional settings for configuring the application.
 - `octobercms_app_name:string` - Specifies the name for the application.
-- `octobercms_app_debug:boolean` - Specifies whether debug mode is enabled.
 - `octobercms_app_url:string` - Specifies the base URL used by the application.
+- `octobercms_app_debug:boolean` - Specifies whether debug mode is enabled.
+
+```yaml
+octobercms_cms_edge_updates: no
+octobercms_cms_backend_uri: backend
+octobercms_cms_backend_timezone: UTC
+octobercms_cms_enable_routes_cache: yes
+octobercms_cms_enable_assets_cache: yes
+octobercms_cms_database_templates: no
+octobercms_cms_enable_csrf: yes
+```
+Optional settings for configuring the CMS.
+- `octobercms_cms_edge_updates:boolean` - Set this to true to download and use development copies of the core files and plugins.
+- `octobercms_cms_backend_uri:string` - Specifies the URL name used for accessing backend pages.
+- `octobercms_cms_backend_timezone:string` - Specifies the default setting for the backend user's timezone.
+- `octobercms_cms_enable_routes_cache:boolean` - Specifies if route caching is enabled. Recommended to disable during development, and enable for production mode.
+- `octobercms_cms_enable_assets_cache:boolean` - Specifies if asset caching is enabled. Recommended to disable during development, and enable for production mode.
+- `octobercms_cms_database_templates:boolean` - Specifies whether the theme templates are stored in the database instead of the filesystem.
+- `octobercms_cms_enable_csrf:boolean` - Specifies whether CSRF protection is enabled.
 
 ```yaml
 octobercms_database_connection: mysql

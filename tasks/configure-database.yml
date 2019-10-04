@@ -1,9 +1,4 @@
 ---
-- name: Define octobercms_database_connection
-  set_fact:
-    octobercms_database_connection: "{{ __octobercms_database_connection }}"
-  when: octobercms_database_connection is not defined
-
 - name: Configure database connection name
   replace:
     path: "{{ octobercms_root_path }}/{{ octobercms_database_config_path }}"

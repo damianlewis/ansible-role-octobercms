@@ -14,3 +14,25 @@
   - debug: "{{ octobercms_app_debug | default(false) | ternary('true', 'false') }}"
   - url: "{{ octobercms_app_url | default('\\g<current_value>') }}"
   when: not octobercms_use_dotenv_config
+
+- name: Configure backend updates, URI and timezone
+  replace:
+    path: "{{ octobercms_root_path }}/{{ octobercms_cms_config_path }}"
+    regexp: "(?P<start>'{{ item.key }}'\\s*=>\\s*'?)(?P<current_value>.*?)(?P<end>'?,)"
+    replace: "\\g<start>{{ item.value }}\\g<end>"
+  with_dict:
+  - edgeUpdates: "{{ octobercms_cms_edge_updates | ternary('true', 'false') }}"
+  - backendUri: "{{ octobercms_cms_backend_uri | default('\\g<current_value>') }}"
+  - backendTimezone: "{{ octobercms_cms_backend_timezone | default('\\g<current_value>') }}"
+
+- name: Configure routes cache, assets cache, database templates and CSRF protection
+  replace:
+    path: "{{ octobercms_root_path }}/{{ octobercms_cms_config_path }}"
+    regexp: "(?P<start>'{{ item.key }}'\\s*=>\\s*'?)(?P<current_value>.*?)(?P<end>'?,)"
+    replace: "\\g<start>{{ item.value }}\\g<end>"
+  with_dict:
+  - enableRoutesCache: "{{ octobercms_cms_enable_routes_cache | ternary('true', 'false') }}"
+  - enableAssetCache: "{{ octobercms_cms_enable_assets_cache | ternary('true', 'false') }}"
+  - databaseTemplates: "{{ octobercms_cms_database_templates | ternary('true', 'false') }}"
+  - enableCsrfProtection: "{{ octobercms_cms_enable_csrf | ternary('true', 'false') }}"
+  when: not octobercms_use_dotenv_config

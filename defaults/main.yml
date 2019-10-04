@@ -23,3 +23,10 @@ octobercms_remove_demo: no
 # octobercms_database_charset: utf8mb4
 # octobercms_database_collation: utf8mb4_unicode_ci
 # octobercms_database_prefix: ''
+
+# CMS configuration settings
+octobercms_cms_edge_updates: no
+octobercms_cms_enable_routes_cache: yes
+octobercms_cms_enable_assets_cache: yes
+octobercms_cms_database_templates: no
+octobercms_cms_enable_csrf: yes

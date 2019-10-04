@@ -6,6 +6,7 @@ octobercms_root_path: /var/www/octobercms/web
 octobercms_owner: "{{ ansible_ssh_user }}"
 
 octobercms_use_dotenv_config: no
+octobercms_remove_demo: no
 
 # Application configuration settings
 # octobercms_app_name: October CMS

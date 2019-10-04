@@ -1,3 +1,32 @@
 ---
+octobercms_build_from_installer: yes
+octobercms_build_from_composer: no
+
 octobercms_root_path: /var/www/octobercms/web
 octobercms_owner: "{{ ansible_ssh_user }}"
+
+octobercms_use_dotenv_config: no
+octobercms_remove_demo: no
+
+# Application configuration settings
+octobercms_app_debug: no
+# octobercms_app_name: October CMS
+# octobercms_app_url: http://localhost
+
+# Database configuration settings
+octobercms_database_connection: mysql
+# octobercms_database_host: localhost
+# octobercms_database_port: 3306
+# octobercms_database_name: database
+# octobercms_database_user: root
+# octobercms_database_password: ''
+# octobercms_database_charset: utf8mb4
+# octobercms_database_collation: utf8mb4_unicode_ci
+# octobercms_database_prefix: ''
+
+# CMS configuration settings
+octobercms_cms_edge_updates: no
+octobercms_cms_enable_routes_cache: yes
+octobercms_cms_enable_assets_cache: yes
+octobercms_cms_database_templates: no
+octobercms_cms_enable_csrf: yes

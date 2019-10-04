@@ -71,9 +71,11 @@ Additional settings for configuring the database. (PostgreSQL)
 
 ```yaml
 octobercms_use_dotenv_config: no
+octobercms_remove_demo: no
 ```
-Converting to DotEnv configuration.
-- `octobercms_use_dotenv_config:boolean` - Set this to true to make use of a DotEnv file for configuration.
+Additional OctoberCMS settings.
+- `octobercms_use_dotenv_config:boolean` - Set this to true to convert base configuration to DotEnv file.
+- `octobercms_remove_demo:boolean` - Set this to true to remove demo theme and plugin.
 
 ## Dependencies
 None.

@@ -14,7 +14,11 @@
 - include_tasks: build-from-composer.yml
   when: octobercms_build_from_composer | bool
 
-- include_tasks: configure.yml
+- include_tasks: configure-app.yml
+- include_tasks: configure-database.yml
+
+- include_tasks: configure-dotenv.yml
+  when: octobercms_use_dotenv_config | bool
 
 - name: Migrate database
   command: php artisan october:up

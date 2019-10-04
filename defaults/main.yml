@@ -5,6 +5,8 @@ octobercms_build_from_composer: no
 octobercms_root_path: /var/www/octobercms/web
 octobercms_owner: "{{ ansible_ssh_user }}"
 
+octobercms_use_dotenv_config: no
+
 # Application configuration settings
 # octobercms_app_name: October CMS
 # octobercms_app_debug: no

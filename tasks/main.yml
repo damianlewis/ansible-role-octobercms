@@ -9,6 +9,11 @@
     octobercms_site_exists: "{{ octobercms_site.stat.exists | default(false) }}"
 
 - include_tasks: build-from-installer.yml
+  when: octobercms_build_from_installer | bool
+
+- include_tasks: build-from-composer.yml
+  when: octobercms_build_from_composer | bool
+
 - include_tasks: configure.yml
 
 - name: Migrate database

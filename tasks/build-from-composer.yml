@@ -1,0 +1,26 @@
+---
+- name: Ensure OctoberCMS root path exists
+  file:
+    path: "{{ octobercms_root_path }}"
+    state: directory
+    owner: "{{ octobercms_owner }}"
+    group: "{{ octobercms_owner }}"
+    mode: 0775
+  when: not octobercms_site_exists
+
+- name: Create OctoberCMS composer project (this can take a while)
+  composer:
+    command: create-project
+    arguments: "{{ octobercms_composer_package }} {{ octobercms_root_path }}"
+    working_dir: "{{ octobercms_root_path }}"
+    prefer_dist: "{{ octobercms_composer_prefer_dist }}"
+    optimize_autoloader: no
+  when: not octobercms_site_exists
+  become_user: "{{ octobercms_owner }}"
+
+- name: Disable OctoberCMS core updates
+  replace:
+    path: "{{ octobercms_root_path }}/{{ octobercms_cms_config_path }}"
+    regexp: "('disableCoreUpdates'\\s*=>\\s*)(.*?)(,)"
+    replace: '\1true\3'
+  when: not octobercms_site_exists

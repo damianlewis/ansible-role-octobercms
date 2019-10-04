@@ -1,0 +1,22 @@
+galaxy_info:
+  role_name: octobercms
+  author: Damian Lewis
+  description: Installs and configures OctoberCMS.
+  license: MIT
+
+  min_ansible_version: 2.4
+
+  platforms:
+  - name: Debian
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
+
+  galaxy_tags:
+  - cms
+  - web
+  - octobercms
+
+dependencies: []

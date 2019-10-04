@@ -6,7 +6,7 @@
     replace: "\\g<start>{{ item.value }}\\g<end>"
   with_dict:
   - name: "{{ octobercms_app_name | default('\\g<current_value>') }}"
-  - debug: "{{ octobercms_app_debug | default('\\g<current_value>') }}"
+  - debug: "{{ octobercms_app_debug | default(false) | ternary('true', 'false') }}"
   - url: "{{ octobercms_app_url | default('\\g<current_value>') }}"
 
 - name: Define octobercms_database_connection

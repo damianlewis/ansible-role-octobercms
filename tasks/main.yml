@@ -1,0 +1,19 @@
+---
+- name: Check if OctoberCMS is already installed
+  stat:
+    path: "{{ octobercms_root_path }}/index.php"
+  register: octobercms_site
+
+- name: Define octobercms_site_exists
+  set_fact:
+    octobercms_site_exists: "{{ octobercms_site.stat.exists | default(false) }}"
+
+- include_tasks: build-from-installer.yml
+- include_tasks: configure.yml
+
+- name: Migrate database
+  command: php artisan october:up
+  args:
+    chdir: "{{ octobercms_root_path }}"
+  register: octobercms_migrate_database
+  changed_when: '"Migration table created" in octobercms_migrate_database.stdout'

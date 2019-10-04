@@ -1,0 +1,65 @@
+---
+- name: Configure application name, URL and debug mode
+  replace:
+    path: "{{ octobercms_root_path }}/{{ octobercms_app_config_path }}"
+    regexp: "(?P<start>'{{ item.key }}'\\s*=>\\s*'?)(?P<current_value>.*?)(?P<end>'?,)"
+    replace: "\\g<start>{{ item.value }}\\g<end>"
+  with_dict:
+  - name: "{{ octobercms_app_name | default('\\g<current_value>') }}"
+  - debug: "{{ octobercms_app_debug | default('\\g<current_value>') }}"
+  - url: "{{ octobercms_app_url | default('\\g<current_value>') }}"
+
+- name: Define octobercms_database_connection
+  set_fact:
+    octobercms_database_connection: "{{ __octobercms_database_connection }}"
+  when: octobercms_database_connection is not defined
+
+- name: Configure database connection name
+  replace:
+    path: "{{ octobercms_root_path }}/{{ octobercms_database_config_path }}"
+    regexp: "('default'\\s*=>\\s*')(.*?)(',)"
+    replace: "\\1{{ octobercms_database_connection | default('\\2') }}\\3"
+
+- name: Configure database host, port, name, user, password and prefix
+  replace:
+    path: "{{ octobercms_root_path }}/{{ octobercms_database_config_path }}"
+    after: "'driver'\\s*=>\\s*'{{ octobercms_database_connection }}'"
+    before: '\],'
+    regexp: "(?P<start>'{{ item.key }}'\\s*=>\\s*'?)(?P<current_value>.*?)(?P<end>'?,)"
+    replace: "\\g<start>{{ item.value }}\\g<end>"
+  with_dict:
+  - host: "{{ octobercms_database_host | default('\\g<current_value>') }}"
+  - port: "{{ octobercms_database_port | default('\\g<current_value>') }}"
+  - database: "{{ octobercms_database_name | default('\\g<current_value>') }}"
+  - username: "{{ octobercms_database_user | default('\\g<current_value>') }}"
+  - password: "{{ octobercms_database_password | default('\\g<current_value>') }}"
+  - prefix: "{{ octobercms_database_prefix | default('\\g<current_value>') }}"
+
+- name: Configure database character (MySQL and PostgreSQL)
+  replace:
+    path: "{{ octobercms_root_path }}/{{ octobercms_database_config_path }}"
+    after: "'driver'\\s*=>\\s*'{{ octobercms_database_connection }}'"
+    before: '\],'
+    regexp: "('charset'\\s*=>\\s*'?)(.*?)(',)"
+    replace: "\\1{{ octobercms_database_charset | default('\\2') }}\\3"
+  when: >
+    octobercms_database_connection == 'mysql' or
+    octobercms_database_connection == 'pgsql'
+
+- name: Configure database collation (MySQL)
+  replace:
+    path: "{{ octobercms_root_path }}/{{ octobercms_database_config_path }}"
+    after: "'driver'\\s*=>\\s*'{{ octobercms_database_connection }}'"
+    before: '\],'
+    regexp: "('collation'\\s*=>\\s*'?)(.*?)(',)"
+    replace: "\\1{{ octobercms_database_collation | default('\\2') }}\\3"
+  when: octobercms_database_connection == 'mysql'
+
+- name: Configure database schema (PostgreSQL)
+  replace:
+    path: "{{ octobercms_root_path }}/{{ octobercms_database_config_path }}"
+    after: "'driver'\\s*=>\\s*'{{ octobercms_database_connection }}'"
+    before: '\],'
+    regexp: "('schema'\\s*=>\\s*'?)(.*?)(',)"
+    replace: "\\1{{ octobercms_database_schema | default('\\2') }}\\3"
+  when: octobercms_database_connection == 'pgsql'

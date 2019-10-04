@@ -1,2 +1,5 @@
 ---
 octobercms_app_config_path: config/app.php
+octobercms_database_config_path: "config/database.php"
+
+__octobercms_database_connection: mysql

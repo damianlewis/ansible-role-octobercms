@@ -16,6 +16,7 @@
     prefer_dist: "{{ octobercms_composer_prefer_dist }}"
     optimize_autoloader: no
   when: not octobercms_site_exists
+  become: yes
   become_user: "{{ octobercms_owner }}"
 
 - name: Disable OctoberCMS core updates

@@ -22,6 +22,7 @@
   register: octobercms_installed
   failed_when: '"OctoberCMS successfully installed" not in octobercms_installed.stdout'
   when: not octobercms_site_exists
+  become: yes
   become_user: "{{ octobercms_owner }}"
 
 - name: Remove OctoberCMS installer

@@ -1,7 +1,10 @@
 ---
 octobercms_app_config_path: config/app.php
+octobercms_cms_config_path: config/cms.php
 octobercms_database_config_path: "config/database.php"
 
 octobercms_installer_url: https://octobercms.com/api/installer
+octobercms_composer_package: october/october
+octobercms_composer_prefer_dist: yes
 
 __octobercms_database_connection: mysql

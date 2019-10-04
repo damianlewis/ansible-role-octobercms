@@ -8,10 +8,14 @@ None.
 Available variables are listed below, along with their default values.
 
 ```yaml
+octobercms_build_from_installer: yes
+octobercms_build_from_composer: no
 octobercms_root_path: /var/www/octobercms/web
 octobercms_owner: "{{ ansible_ssh_user }}"
 ```
 Installation settings.
+- `octobercms_build_from_installer:boolean` - Set this to true and `octobercms_build_from_composer` to false to install OctoberCMS using the native installer.
+- `octobercms_build_from_composer:boolean` - Set this to true and `octobercms_build_from_installer` to false to install OctoberCMS using Composer.
 - `octobercms_root_path:string` - Specifies where OctoberCMS will be installed.
 - `octobercms_owner:string` - Specifies the user that will have ownership of the OctoberCMS installation.
 

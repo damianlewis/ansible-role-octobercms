@@ -1,0 +1,24 @@
+---
+- name: Ensure .env file exists
+  command: php artisan october:env
+  args:
+    chdir: "{{ octobercms_root_path }}"
+    creates: "{{ octobercms_root_path }}/.env"
+  register: octobercms_env_installed
+  become_user: "{{ octobercms_owner }}"
+
+- name: Configure .env file
+  lineinfile:
+    path: "{{ octobercms_root_path }}/.env"
+    regexp: '(?P<start>{{ item.key | upper }}=)(?P<current_value>.*)'
+    line: "\\g<start>{{ item.value }}"
+    backrefs: yes
+  with_dict:
+  - app_debug: "{{ octobercms_app_debug | default(false) | ternary('true', 'false') }}"
+  - app_url: "{{ octobercms_app_url | default('\\g<current_value>') }}"
+  - db_connection: "{{ octobercms_database_connection | default('\\g<current_value>') }}"
+  - db_host: "{{ octobercms_database_host | default('\\g<current_value>') }}"
+  - db_port: "{{ octobercms_database_port | default('\\g<current_value>') }}"
+  - db_database: "{{ octobercms_database_name | default('\\g<current_value>') }}"
+  - db_username: "{{ octobercms_database_user | default('\\g<current_value>') }}"
+  - db_password: "{{ octobercms_database_password | default('\\g<current_value>') }}"

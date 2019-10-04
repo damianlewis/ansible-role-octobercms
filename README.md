@@ -21,12 +21,12 @@ Installation settings.
 
 ```yaml
 octobercms_app_name: October CMS
-octobercms_app_debug: 'true'
+octobercms_app_debug: no
 octobercms_app_url: http://localhost
 ```
 Optional settings for configuring the application.
 - `octobercms_app_name:string` - Specifies the name for the application.
-- `octobercms_app_debug:string` - Specifies the debug mode. The possible values are 'true' or 'false'. **Note: These values must be quoted to prevent ansible converting them to ansible booleans.**
+- `octobercms_app_debug:boolean` - Specifies whether debug mode is enabled.
 - `octobercms_app_url:string` - Specifies the base URL used by the application.
 
 ```yaml

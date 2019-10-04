@@ -1,0 +1,5 @@
+---
+octobercms_installer_url: https://octobercms.com/api/installer
+
+octobercms_root_path: /var/www/octobercms/web
+octobercms_owner: "{{ ansible_ssh_user }}"

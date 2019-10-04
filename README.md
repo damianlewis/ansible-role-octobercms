@@ -45,7 +45,7 @@ octobercms_database_port: 3306 for MySQL / 5432 for PostgreSQL / 1433 for SQL Se
 octobercms_database_user: root
 octobercms_database_password: ''
 ```
-Additional settings for configuring the database (MySQL, PostgreSQL and SQL Server)
+Additional settings for configuring the database. (MySQL, PostgreSQL and SQL Server)
 - `octobercms_database_host:string` - Specifies the host where the database is located.
 - `octobercms_database_port:int` - Specifies the port for accessing the database.
 - `octobercms_database_user:string` - Specifies the database user.
@@ -54,20 +54,26 @@ Additional settings for configuring the database (MySQL, PostgreSQL and SQL Serv
 ```yaml
 octobercms_database_charset: 'utf8mb4' for MySQL / 'utf8' for PostgreSQL
 ```
-Additional settings for configuring the database (MySQL, PostgreSQL)
+Additional settings for configuring the database. (MySQL, PostgreSQL)
 - `octobercms_database_charset:string` - Specifies the character set for the database.
 
 ```yaml
 octobercms_database_collation: utf8mb4_unicode_ci
 ```
-Additional settings for configuring the database (MySQL)
+Additional settings for configuring the database. (MySQL)
 - `octobercms_database_collation:string` - Specifies the collation used for the database.
 
 ```yaml
 octobercms_database_schema: public
 ```
-Additional settings for configuring the database (PostgreSQL)
+Additional settings for configuring the database. (PostgreSQL)
 - `octobercms_database_schema:string` - Specifies the schema used for the database.
+
+```yaml
+octobercms_use_dotenv_config: no
+```
+Converting to DotEnv configuration.
+- `octobercms_use_dotenv_config:boolean` - Set this to true to make use of a DotEnv file for configuration.
 
 ## Dependencies
 None.

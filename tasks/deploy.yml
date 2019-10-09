@@ -1,0 +1,90 @@
+---
+- name: Ensure SSH key path exists
+  file:
+    path: "{{ octobercms_ssh_key_path }}"
+    state: directory
+    mode: 0700
+  when: octobercms_deploy_deployment_key_path is defined
+
+- name: Ensure SSH deployment key is present
+  copy:
+    src: "{{ octobercms_deploy_deployment_key_path }}"
+    dest: "{{ octobercms_ssh_key_path }}/{{ octobercms_deployment_key_name }}"
+    mode: 0400
+  when: octobercms_deploy_deployment_key_path is defined
+
+- name: Checkout application from repo
+  git:
+    repo: "{{ octobercms_deploy_repo }}"
+    dest: "{{ octobercms_deploy_path }}"
+    version: "{{ octobercms_deploy_version }}"
+    accept_hostkey: true
+    force: true
+    depth: "{{ octobercms_deploy_depth | default(omit) }}"
+  register: octobercms_deploy_repo_installed
+  notify: clear cache
+  when:
+  - octobercms_deploy_deployment_key_path is not defined
+
+- name: Checkout application from repo using SSH deployment key
+  git:
+    repo: "{{ octobercms_deploy_repo }}"
+    dest: "{{ octobercms_deploy_path }}"
+    version: "{{ octobercms_deploy_version }}"
+    key_file: "{{ octobercms_ssh_key_path }}/{{ octobercms_deployment_key_name }}"
+    accept_hostkey: true
+    force: true
+    depth: "{{ octobercms_deploy_depth | default(omit) }}"
+  register: octobercms_deploy_repo_installed
+  notify: clear cache
+  when:
+  - octobercms_deploy_deployment_key_path is defined
+
+- name: Update octobercms_site_exists
+  set_fact:
+    octobercms_site_exists: "{{ octobercms_deploy_repo_installed is defined | default(false) }}"
+
+- name: Remove SSH deployment key
+  file:
+    path: "{{ octobercms_ssh_key_path }}/{{ octobercms_deployment_key_name }}"
+    state: absent
+  when: octobercms_deploy_deployment_key_path is defined
+
+- name: Check if a composer.json file exists
+  stat:
+    path: "{{ octobercms_deploy_path }}/composer.json"
+  register: octobercms_deploy_composer_json_file
+
+- name: Check if a composer.lock file exists
+  stat:
+    path: "{{ octobercms_deploy_path }}/composer.lock"
+  register: octobercms_deploy_composer_lock_file
+
+- name: Run composer update if composer.lock doesn't exist (this can take a while)
+  composer:
+    command: update
+    working_dir: "{{ octobercms_deploy_path }}"
+    no_dev: "{{ octobercms_composer_no_dev }}"
+  register: octobercms_deploy_composer_updated
+  when:
+  - octobercms_deploy_composer_json_file.stat.exists
+  - not octobercms_deploy_composer_lock_file.stat.exists
+  - octobercms_deploy_composer_install
+
+- name: Run composer install if composer.lock exists (this can take a while)
+  composer:
+    command: install
+    working_dir: "{{ octobercms_deploy_path }}"
+    no_dev: "{{ octobercms_composer_no_dev }}"
+  when:
+  - octobercms_deploy_composer_lock_file.stat.exists
+  - octobercms_deploy_composer_install
+  - not octobercms_deploy_composer_updated.changed
+
+- name: Ensure application has correct owner/group
+  file:
+    path: "{{ octobercms_deploy_path }}"
+    state: directory
+    owner: "{{ octobercms_owner }}"
+    group: "{{ octobercms_owner }}"
+    recurse: yes

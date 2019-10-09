@@ -1,0 +1,28 @@
+---
+- name: Migrate database
+  command: php artisan october:up
+  args:
+    chdir: "{{ octobercms_root_path }}"
+  register: octobercms_migrate_database
+  changed_when: '"Migration table created" in octobercms_migrate_database.stdout'
+
+- name: Remove OctoberCMS demo theme and plugin
+  command: php artisan october:fresh
+  args:
+    chdir: "{{ octobercms_root_path }}"
+  register: octobercms_demo_removed
+  when: octobercms_remove_demo | bool
+  changed_when: '"Demo has been removed" in octobercms_demo_removed.stdout'
+
+- name: Configure the OctoberCMS scheduler
+  cron:
+    name: OctoberCMS scheduler
+    job: php {{ octobercms_root_path }}/artisan schedule:run >> /dev/null 2>&1
+
+- name: Ensure application has correct owner/group
+  file:
+    path: "{{ octobercms_deploy_path }}"
+    state: directory
+    owner: "{{ octobercms_owner }}"
+    group: "{{ octobercms_owner }}"
+    recurse: yes

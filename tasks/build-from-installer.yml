@@ -3,9 +3,6 @@
   file:
     path: "{{ octobercms_installer_path }}"
     state: directory
-    owner: "{{ octobercms_owner }}"
-    group: "{{ octobercms_owner }}"
-    mode: 0775
   when: not octobercms_site_exists
 
 - name: Download OctoberCMS installer
@@ -13,7 +10,6 @@
     url: "{{ octobercms_installer_url }}"
     dest: "{{ octobercms_installer_path }}/installer"
   when: not octobercms_site_exists
-  become: no
 
 - name: Ensure OctoberCMS is installed
   command: php installer
@@ -22,8 +18,6 @@
   register: octobercms_installed
   failed_when: '"OctoberCMS successfully installed" not in octobercms_installed.stdout'
   when: not octobercms_site_exists
-  become: yes
-  become_user: "{{ octobercms_owner }}"
 
 - name: Remove OctoberCMS installer
   file:

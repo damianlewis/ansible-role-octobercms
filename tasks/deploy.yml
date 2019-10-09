@@ -49,11 +49,3 @@
     path: "{{ octobercms_ssh_key_path }}/{{ octobercms_deployment_key_name }}"
     state: absent
   when: octobercms_deploy_deployment_key_path is defined
-
-- name: Ensure application has correct owner/group
-  file:
-    path: "{{ octobercms_deploy_path }}"
-    state: directory
-    owner: "{{ octobercms_owner }}"
-    group: "{{ octobercms_owner }}"
-    recurse: yes

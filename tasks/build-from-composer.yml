@@ -3,9 +3,6 @@
   file:
     path: "{{ octobercms_composer_project_path }}"
     state: directory
-    owner: "{{ octobercms_owner }}"
-    group: "{{ octobercms_owner }}"
-    mode: 0775
   when: not octobercms_site_exists
 
 - name: Create OctoberCMS composer project (this can take a while)
@@ -17,8 +14,6 @@
     no_dev: "{{ octobercms_composer_no_dev }}"    
     optimize_autoloader: no
   when: not octobercms_site_exists
-  become: yes
-  become_user: "{{ octobercms_owner }}"
 
 - name: Disable OctoberCMS core updates
   replace:

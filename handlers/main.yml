@@ -1,0 +1,5 @@
+---
+- name: clear cache
+  command: php artisan cache:clear
+  args:
+    chdir: "{{ octobercms_root_path }}"

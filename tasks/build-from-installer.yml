@@ -1,7 +1,7 @@
 ---
-- name: Ensure OctoberCMS root path exists
+- name: Ensure OctoberCMS installer path exists
   file:
-    path: "{{ octobercms_root_path }}"
+    path: "{{ octobercms_installer_path }}"
     state: directory
     owner: "{{ octobercms_owner }}"
     group: "{{ octobercms_owner }}"
@@ -11,14 +11,14 @@
 - name: Download OctoberCMS installer
   get_url:
     url: "{{ octobercms_installer_url }}"
-    dest: "{{ octobercms_root_path }}/installer"
+    dest: "{{ octobercms_installer_path }}/installer"
   when: not octobercms_site_exists
   become: no
 
 - name: Ensure OctoberCMS is installed
   command: php installer
   args:
-    chdir: "{{ octobercms_root_path }}"
+    chdir: "{{ octobercms_installer_path }}"
   register: octobercms_installed
   failed_when: '"OctoberCMS successfully installed" not in octobercms_installed.stdout'
   when: not octobercms_site_exists
@@ -27,14 +27,14 @@
 
 - name: Remove OctoberCMS installer
   file:
-    path: "{{ octobercms_root_path }}/installer"
+    path: "{{ octobercms_installer_path }}/installer"
     state: absent
   when: not octobercms_site_exists
 
 - name: Generate encryption key
   command: php artisan key:generate
   args:
-    chdir: "{{ octobercms_root_path }}"
+    chdir: "{{ octobercms_installer_path }}"
   register: octobercms_encryption_key_generated
   failed_when:
   - '"Application key" not in octobercms_encryption_key_generated.stdout'

@@ -8,14 +8,46 @@ None.
 Available variables are listed below, along with their default values.
 
 ```yaml
+octobercms_deploy: no
+octobercms_deploy_repo: ''
+octobercms_deploy_version: master
+octobercms_deploy_depth: 0
+octobercms_deploy_path: /var/www/octobercms
+octobercms_deploy_composer_install: yes
+octobercms_deploy_deployment_key_path: ~/.ssh/id_octobercms_deployment
+```
+Deploying an existing OctoberCMS application from a Git repository.
+- `octobercms_deploy:boolean` - Set this to true and both `octobercms_build_from_installer` and `octobercms_build_from_composer` to false to clone from a Git repository.
+- `octobercms_deploy_repo:string` - Specifies the URL of the repository.
+- `octobercms_deploy_version:string` - Specifies the version to install. Can be a branch or tag name.
+- `octobercms_deploy_depth:int` - Specifies the number of revisions to truncate the cloned repository. A value of `0` will download all revisions.
+- `octobercms_deploy_path:string` - Specifies where the repository will be cloned to.
+- `octobercms_deploy_composer_install:boolean` - Specifies whether `composer install` should be run after the repository has been cloned.
+- `octobercms_deploy_deployment_key_path:string` - Specifies the path to the SSH Git deployment key. Required when working with private repositories.
+
+```yaml
 octobercms_build_from_installer: yes
+octobercms_installer_path: "{{ octobercms_deploy_path }}"
+```
+Installing OctoberCMS using the native installer.
+- `octobercms_build_from_installer:boolean` - Set this to true and `octobercms_build_from_composer` to false to install using the native installer.
+- `octobercms_installer_path:string` - Specifies where OctoberCMS will be installed.
+
+```yaml
 octobercms_build_from_composer: no
-octobercms_root_path: /var/www/octobercms/web
+octobercms_composer_project_path: "{{ octobercms_deploy_path }}"
+octobercms_composer_no_dev: yes
+```
+Installing OctoberCMS using the Composer.
+- `octobercms_build_from_composer:boolean` - Set this to true and `octobercms_build_from_installer` to false to install using Composer.
+- `octobercms_composer_project_path:string` - Specifies where OctoberCMS will be installed.
+- `octobercms_composer_no_dev:boolean` - Specifies whether the installation of required dev packages should be disabled.
+
+```yaml
+octobercms_root_path: "{{ octobercms_deploy_path }}"
 octobercms_owner: "{{ ansible_ssh_user }}"
 ```
-Installation settings.
-- `octobercms_build_from_installer:boolean` - Set this to true and `octobercms_build_from_composer` to false to install OctoberCMS using the native installer.
-- `octobercms_build_from_composer:boolean` - Set this to true and `octobercms_build_from_installer` to false to install OctoberCMS using Composer.
+Configuration settings.
 - `octobercms_root_path:string` - Specifies where OctoberCMS will be installed.
 - `octobercms_owner:string` - Specifies the user that will have ownership of the OctoberCMS installation.
 
@@ -105,7 +137,7 @@ None.
 
   vars:
     octobercms_owner: www-data
-    octobercms_app_debug: 'false'
+    octobercms_app_debug: no
     octobercms_app_url: https://example.com
     octobercms_database_name: octobercms
     octobercms_database_user: octobercms_user

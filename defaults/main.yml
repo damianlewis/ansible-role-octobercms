@@ -4,7 +4,6 @@ octobercms_deploy_repo: ''
 octobercms_deploy_version: master
 octobercms_deploy_depth: 0
 octobercms_deploy_path: /var/www/octobercms
-octobercms_deploy_composer_install: yes
 # octobercms_deploy_deployment_key_path: ~/.ssh/id_octobercms_deployment
 
 octobercms_build_from_installer: yes
@@ -12,6 +11,7 @@ octobercms_installer_path: "{{ octobercms_deploy_path }}"
 
 octobercms_build_from_composer: no
 octobercms_composer_project_path: "{{ octobercms_deploy_path }}"
+octobercms_composer_install: no
 octobercms_composer_no_dev: yes
 
 octobercms_root_path: "{{ octobercms_deploy_path }}"

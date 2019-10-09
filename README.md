@@ -13,7 +13,6 @@ octobercms_deploy_repo: ''
 octobercms_deploy_version: master
 octobercms_deploy_depth: 0
 octobercms_deploy_path: /var/www/octobercms
-octobercms_deploy_composer_install: yes
 octobercms_deploy_deployment_key_path: ~/.ssh/id_octobercms_deployment
 ```
 Deploying an existing OctoberCMS application from a Git repository.
@@ -22,7 +21,6 @@ Deploying an existing OctoberCMS application from a Git repository.
 - `octobercms_deploy_version:string` - Specifies the version to install. Can be a branch or tag name.
 - `octobercms_deploy_depth:int` - Specifies the number of revisions to truncate the cloned repository. A value of `0` will download all revisions.
 - `octobercms_deploy_path:string` - Specifies where the repository will be cloned to.
-- `octobercms_deploy_composer_install:boolean` - Specifies whether `composer install` should be run after the repository has been cloned.
 - `octobercms_deploy_deployment_key_path:string` - Specifies the path to the SSH Git deployment key. Required when working with private repositories.
 
 ```yaml
@@ -36,11 +34,13 @@ Installing OctoberCMS using the native installer.
 ```yaml
 octobercms_build_from_composer: no
 octobercms_composer_project_path: "{{ octobercms_deploy_path }}"
+octobercms_composer_install: no
 octobercms_composer_no_dev: yes
 ```
 Installing OctoberCMS using the Composer.
 - `octobercms_build_from_composer:boolean` - Set this to true and `octobercms_build_from_installer` to false to install using Composer.
 - `octobercms_composer_project_path:string` - Specifies where OctoberCMS will be installed.
+- `octobercms_composer_install:boolean` - Specifies whether `composer install` should be run after OctoberCMS has been installed.
 - `octobercms_composer_no_dev:boolean` - Specifies whether the installation of required dev packages should be disabled.
 
 ```yaml

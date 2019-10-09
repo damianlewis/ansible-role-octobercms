@@ -5,8 +5,6 @@
     chdir: "{{ octobercms_root_path }}"
     creates: "{{ octobercms_root_path }}/.env"
   register: octobercms_env_installed
-  become: yes
-  become_user: "{{ octobercms_owner }}"
 
 - name: Configure .env file
   lineinfile:

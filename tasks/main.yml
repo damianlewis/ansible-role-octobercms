@@ -17,6 +17,9 @@
 - include_tasks: build-from-composer.yml
   when: octobercms_build_from_composer | bool
 
+- include_tasks: composer-install.yml
+  when: octobercms_composer_install | bool
+
 - include_tasks: configure-app.yml
 - include_tasks: configure-database.yml
 
@@ -37,3 +40,11 @@
   register: octobercms_demo_removed
   when: octobercms_remove_demo | bool
   changed_when: '"Demo has been removed" in octobercms_demo_removed.stdout'
+
+- name: Ensure application has correct owner/group
+  file:
+    path: "{{ octobercms_deploy_path }}"
+    state: directory
+    owner: "{{ octobercms_owner }}"
+    group: "{{ octobercms_owner }}"
+    recurse: yes

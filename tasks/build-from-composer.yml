@@ -11,7 +11,7 @@
     arguments: "{{ octobercms_composer_package }} {{ octobercms_composer_project_path }}"
     working_dir: "{{ octobercms_composer_project_path }}"
     prefer_dist: "{{ octobercms_composer_prefer_dist }}"
-    no_dev: "{{ octobercms_composer_no_dev }}"    
+    no_dev: "{{ octobercms_composer_no_dev }}"
     optimize_autoloader: no
   when: not octobercms_site_exists | bool
 

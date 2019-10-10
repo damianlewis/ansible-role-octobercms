@@ -13,7 +13,7 @@
   with_dict:
   - debug: "{{ octobercms_app_debug | ternary('true', 'false') }}"
   - url: "{{ octobercms_app_url | default('\\g<current_value>') }}"
-  when: not octobercms_use_dotenv_config
+  when: not octobercms_use_dotenv_config | bool
 
 - name: Configure backend updates, URI and timezone
   replace:
@@ -35,4 +35,4 @@
   - enableAssetCache: "{{ octobercms_cms_enable_assets_cache | ternary('true', 'false') }}"
   - databaseTemplates: "{{ octobercms_cms_database_templates | ternary('true', 'false') }}"
   - enableCsrfProtection: "{{ octobercms_cms_enable_csrf | ternary('true', 'false') }}"
-  when: not octobercms_use_dotenv_config
+  when: not octobercms_use_dotenv_config | bool

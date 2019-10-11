@@ -1,5 +1,13 @@
 ---
 - name: clear cache
-  command: php artisan cache:clear
+  command: php {{ item }}
   args:
     chdir: "{{ octobercms_root_path }}"
+  loop:
+  - artisan clear-compiled
+  - artisan cache:clear
+  - artisan config:clear
+  - artisan route:clear
+  - artisan view:clear
+  - -r "if (function_exists('apc_clear_cache')) { apc_clear_cache(); }"
+  - -r "if (function_exists('opcache_reset')) { opcache_reset(); }"

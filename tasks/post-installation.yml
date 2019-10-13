@@ -6,7 +6,7 @@
   register: octobercms_migrate_database
   changed_when: '"Migration table created" in octobercms_migrate_database.stdout'
 
-- name: Remove OctoberCMS demo theme and plugin
+- name: Remove October demo theme and plugin
   command: php artisan october:fresh
   args:
     chdir: "{{ octobercms_root_path }}"
@@ -14,7 +14,7 @@
   when: octobercms_remove_demo | bool
   changed_when: '"Demo has been removed" in octobercms_demo_removed.stdout'
 
-- name: Configure the OctoberCMS scheduler
+- name: Configure the October scheduler
   cron:
     name: OctoberCMS scheduler
     job: php {{ octobercms_root_path }}/artisan schedule:run >> /dev/null 2>&1

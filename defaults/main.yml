@@ -37,6 +37,7 @@ octobercms_database_connection: mysql
 
 # CMS configuration settings
 octobercms_cms_edge_updates: no
+octobercms_cms_disable_core_updates: "{{ octobercms_build_from_composer | default(no) }}"
 octobercms_cms_enable_routes_cache: yes
 octobercms_cms_enable_assets_cache: yes
 octobercms_cms_database_templates: no

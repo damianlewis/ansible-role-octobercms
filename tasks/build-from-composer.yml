@@ -14,10 +14,3 @@
     no_dev: "{{ octobercms_composer_no_dev }}"
     optimize_autoloader: no
   when: not octobercms_site_exists | bool
-
-- name: Disable OctoberCMS core updates
-  replace:
-    path: "{{ octobercms_composer_project_path }}/{{ octobercms_cms_config_path }}"
-    regexp: "('disableCoreUpdates'\\s*=>\\s*)(.*?)(,)"
-    replace: '\1true\3'
-  when: not octobercms_site_exists | bool

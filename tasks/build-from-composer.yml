@@ -1,11 +1,11 @@
 ---
-- name: Ensure OctoberCMS composer project path exists
+- name: Ensure October composer project path exists
   file:
     path: "{{ octobercms_composer_project_path }}"
     state: directory
   when: not octobercms_site_exists | bool
 
-- name: Create OctoberCMS composer project (this can take a while)
+- name: Create October composer project (this can take a while)
   composer:
     command: create-project
     arguments: "{{ octobercms_composer_package }} {{ octobercms_composer_project_path }}"

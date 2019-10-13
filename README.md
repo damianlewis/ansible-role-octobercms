@@ -1,5 +1,5 @@
-# Ansible Role: OctoberCMS
-Role for installing and configuring OctoberCMS.
+# Ansible Role: October CMS
+Role for installing and configuring October CMS.
 
 ## Requirements
 None.
@@ -15,7 +15,7 @@ octobercms_deploy_depth: 0
 octobercms_deploy_path: /var/www/octobercms
 octobercms_deploy_deployment_key_path: ~/.ssh/id_octobercms_deployment
 ```
-Deploying an existing OctoberCMS application from a Git repository.
+Deploying an existing October CMS application from a Git repository.
 - `octobercms_deploy:boolean` - Set this to true and both `octobercms_build_from_installer` and `octobercms_build_from_composer` to false to clone from a Git repository.
 - `octobercms_deploy_repo:string` - Specifies the URL of the repository.
 - `octobercms_deploy_version:string` - Specifies the version to install. Can be a branch or tag name.
@@ -27,9 +27,9 @@ Deploying an existing OctoberCMS application from a Git repository.
 octobercms_build_from_installer: yes
 octobercms_installer_path: "{{ octobercms_deploy_path }}"
 ```
-Installing OctoberCMS using the native installer.
+Installing October using the native installer.
 - `octobercms_build_from_installer:boolean` - Set this to true and `octobercms_build_from_composer` to false to install using the native installer.
-- `octobercms_installer_path:string` - Specifies where OctoberCMS will be installed.
+- `octobercms_installer_path:string` - Specifies where October will be installed.
 
 ```yaml
 octobercms_build_from_composer: no
@@ -37,10 +37,10 @@ octobercms_composer_project_path: "{{ octobercms_deploy_path }}"
 octobercms_composer_install: no
 octobercms_composer_no_dev: yes
 ```
-Installing OctoberCMS using the Composer.
+Installing October using the Composer.
 - `octobercms_build_from_composer:boolean` - Set this to true and `octobercms_build_from_installer` to false to install using Composer.
-- `octobercms_composer_project_path:string` - Specifies where OctoberCMS will be installed.
-- `octobercms_composer_install:boolean` - Specifies whether `composer install` should be run after OctoberCMS has been installed.
+- `octobercms_composer_project_path:string` - Specifies where October will be installed.
+- `octobercms_composer_install:boolean` - Specifies whether `composer install` should be run after October has been installed.
 - `octobercms_composer_no_dev:boolean` - Specifies whether the installation of required dev packages should be disabled.
 
 ```yaml
@@ -48,8 +48,8 @@ octobercms_root_path: "{{ octobercms_deploy_path }}"
 octobercms_owner: "{{ ansible_ssh_user }}"
 ```
 Configuration settings.
-- `octobercms_root_path:string` - Specifies where OctoberCMS will be installed.
-- `octobercms_owner:string` - Specifies the user that will have ownership of the OctoberCMS installation.
+- `octobercms_root_path:string` - Specifies where October will be installed.
+- `octobercms_owner:string` - Specifies the user that will have ownership of the October installation.
 
 ```yaml
 octobercms_app_name: October CMS
@@ -71,7 +71,7 @@ octobercms_cms_enable_assets_cache: yes
 octobercms_cms_database_templates: no
 octobercms_cms_enable_csrf: yes
 ```
-Optional settings for configuring the CMS.
+Optional settings for configuring October.
 - `octobercms_cms_edge_updates:boolean` - Set this to true to download and use development copies of the core files and plugins.
 - `octobercms_cms_disable_core_updates:boolean` - Set this to true to disable core updates from being delivered by the October gateway.
 - `octobercms_cms_backend_uri:string` - Specifies the URL name used for accessing backend pages.
@@ -86,7 +86,7 @@ octobercms_database_connection: mysql
 octobercms_database_name: 'database' or MySQL, PostgreSQL and SQL Server / 'storage/database.sqlite' for SQLite
 octobercms_database_prefix: ''
 ```
-Settings for configuring a database for use with OctoberCMS.
+Settings for configuring a database for use with October.
 - `octobercms_database_connection:string` - Specifies which database connection to use. Possible options are `sqlite`, `mysql`, `pgsql` and `sqlsrv`.
 - `octobercms_database_name:string` - Specifies the name of database.
 - `octobercms_database_prefix:string` - Specifies a prefix which is added to the database table names.
@@ -125,7 +125,7 @@ Additional settings for configuring the database. (PostgreSQL)
 octobercms_use_dotenv_config: no
 octobercms_remove_demo: no
 ```
-Additional OctoberCMS settings.
+Additional October settings.
 - `octobercms_use_dotenv_config:boolean` - Set this to true to convert base configuration to DotEnv file.
 - `octobercms_remove_demo:boolean` - Set this to true to remove demo theme and plugin.
 

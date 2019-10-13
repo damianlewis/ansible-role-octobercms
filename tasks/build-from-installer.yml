@@ -1,17 +1,17 @@
 ---
-- name: Ensure OctoberCMS installer path exists
+- name: Ensure October installer path exists
   file:
     path: "{{ octobercms_installer_path }}"
     state: directory
   when: not octobercms_site_exists | bool
 
-- name: Download OctoberCMS installer
+- name: Download October installer
   get_url:
     url: "{{ octobercms_installer_url }}"
     dest: "{{ octobercms_installer_path }}/installer"
   when: not octobercms_site_exists | bool
 
-- name: Ensure OctoberCMS is installed
+- name: Ensure October is installed
   command: php installer
   args:
     chdir: "{{ octobercms_installer_path }}"
@@ -19,7 +19,7 @@
   failed_when: '"OctoberCMS successfully installed" not in octobercms_installed.stdout'
   when: not octobercms_site_exists | bool
 
-- name: Remove OctoberCMS installer
+- name: Remove October installer
   file:
     path: "{{ octobercms_installer_path }}/installer"
     state: absent

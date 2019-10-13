@@ -1,7 +1,7 @@
 galaxy_info:
   role_name: octobercms
   author: Damian Lewis
-  description: Installs and configures OctoberCMS.
+  description: Installs and configures October CMS.
   license: MIT
 
   min_ansible_version: 2.4

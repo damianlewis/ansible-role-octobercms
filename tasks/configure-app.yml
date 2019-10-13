@@ -22,6 +22,7 @@
     replace: "\\g<start>{{ item.value }}\\g<end>"
   with_dict:
   - edgeUpdates: "{{ octobercms_cms_edge_updates | ternary('true', 'false') }}"
+  - disableCoreUpdates: "{{ octobercms_cms_disable_core_updates | ternary('true', 'false') }}"
   - backendUri: "{{ octobercms_cms_backend_uri | default('\\g<current_value>') }}"
   - backendTimezone: "{{ octobercms_cms_backend_timezone | default('\\g<current_value>') }}"
 

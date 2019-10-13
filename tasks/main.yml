@@ -1,5 +1,5 @@
 ---
-- name: Check if OctoberCMS is already installed
+- name: Check if October is already installed
   stat:
     path: "{{ octobercms_root_path }}/index.php"
   register: octobercms_site

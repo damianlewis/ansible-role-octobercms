@@ -54,11 +54,13 @@ Configuration settings.
 ```yaml
 octobercms_app_name: October CMS
 octobercms_app_url: http://localhost
+octobercms_app_key: ''
 octobercms_app_debug: no
 ```
 Optional settings for configuring the application.
 - `octobercms_app_name:string` - Specifies the name for the application.
 - `octobercms_app_url:string` - Specifies the base URL used by the application.
+- `octobercms_app_key:string` - Specifies the encryption key the application should use.
 - `octobercms_app_debug:boolean` - Specifies whether debug mode is enabled.
 
 ```yaml

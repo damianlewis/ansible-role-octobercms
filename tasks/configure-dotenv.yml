@@ -15,6 +15,7 @@
   with_dict:
   - app_debug: "{{ octobercms_app_debug | ternary('true', 'false') }}"
   - app_url: "{{ octobercms_app_url | default('\\g<current_value>') }}"
+  - app_key: "{{ octobercms_app_key | default('\\g<current_value>') }}"
   - db_connection: "{{ octobercms_database_connection | default('\\g<current_value>') }}"
   - db_host: "{{ octobercms_database_host | default('\\g<current_value>') }}"
   - db_port: "{{ octobercms_database_port | default('\\g<current_value>') }}"

@@ -13,6 +13,7 @@
   with_dict:
   - debug: "{{ octobercms_app_debug | ternary('true', 'false') }}"
   - url: "{{ octobercms_app_url | default('\\g<current_value>') }}"
+  - key: "{{ octobercms_app_key | default('\\g<current_value>') }}"
   when: not octobercms_use_dotenv_config | bool
 
 - name: Configure backend updates, URI and timezone

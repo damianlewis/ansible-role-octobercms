@@ -125,7 +125,7 @@ Additional settings for configuring the database. (PostgreSQL)
 
 ```yaml
 octobercms_use_dotenv_config: no
-octobercms_use_config_for_testing: false
+octobercms_use_config_for_testing: no
 octobercms_remove_demo: no
 ```
 Additional October settings.

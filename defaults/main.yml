@@ -25,6 +25,7 @@ octobercms_app_debug: no
 # octobercms_app_name: October CMS
 # octobercms_app_url: http://localhost
 # octobercms_app_key: ''
+# octobercms_app_timezone: UTC
 
 # Database configuration settings
 octobercms_database_connection: mysql

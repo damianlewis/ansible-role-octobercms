@@ -1,9 +1,12 @@
 ---
-- name: Configure application name
+- name: Configure application name and timezone
   replace:
     path: "{{ octobercms_root_path }}/{{ octobercms_app_config_path }}"
-    regexp: "('name'\\s*=>\\s*')(.*?)(',)"
-    replace: "\\1{{ octobercms_app_name | default('\\2') }}\\3"
+    regexp: "(?P<start>'{{ item.key }}'\\s*=>\\s*'?)(?P<current_value>.*?)(?P<end>'?,)"
+    replace: "\\g<start>{{ item.value }}\\g<end>"
+  with_dict:
+  - name: "{{ octobercms_app_name | default('\\g<current_value>') }}"
+  - timezone: "{{ octobercms_app_timezone | default('\\g<current_value>') }}"
 
 - name: Configure application URL and debug mode
   replace:

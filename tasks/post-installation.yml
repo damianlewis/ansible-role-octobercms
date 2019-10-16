@@ -4,6 +4,7 @@
   args:
     chdir: "{{ octobercms_root_path }}"
   register: octobercms_migrate_database
+  changed_when: '"Migration table created" in octobercms_migrate_database.stdout or "- v" in octobercms_migrate_database.stdout'
 
 - name: Remove October demo theme and plugin
   command: php artisan october:fresh

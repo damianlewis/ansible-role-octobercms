@@ -46,3 +46,6 @@ octobercms_cms_enable_routes_cache: yes
 octobercms_cms_enable_assets_cache: yes
 octobercms_cms_database_templates: no
 octobercms_cms_enable_csrf: yes
+# octobercms_cms_active_theme: demo
+# octobercms_cms_backend_uri: backend
+# octobercms_cms_backend_timezone: UTC

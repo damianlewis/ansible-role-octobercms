@@ -56,6 +56,7 @@ octobercms_app_name: October CMS
 octobercms_app_url: http://localhost
 octobercms_app_key: ''
 octobercms_app_timezone: UTC
+octobercms_app_environment: production
 octobercms_app_debug: no
 ```
 Optional settings for configuring the application.
@@ -63,6 +64,7 @@ Optional settings for configuring the application.
 - `octobercms_app_url:string` - Specifies the base URL used by the application.
 - `octobercms_app_key:string` - Specifies the encryption key the application should use.
 - `octobercms_app_timezone:string` - Specifies the application timezone. It is HIGHLY recommended that this is left set to UTC (as your server & DB timezone should be as well) and instead you use `octobercms_cms_backend_timezone` to set the default timezone used in the backend to display dates & times.
+- `octobercms_app_environment:string` - Specifies the application environment.
 - `octobercms_app_debug:boolean` - Specifies whether debug mode is enabled.
 
 ```yaml

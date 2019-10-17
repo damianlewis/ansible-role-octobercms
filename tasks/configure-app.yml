@@ -41,3 +41,10 @@
   - databaseTemplates: "{{ octobercms_cms_database_templates | ternary('true', 'false') }}"
   - enableCsrfProtection: "{{ octobercms_cms_enable_csrf | ternary('true', 'false') }}"
   when: not octobercms_use_dotenv_config | bool
+
+- name: Configure default application environment
+  replace:
+    path: "{{ octobercms_root_path }}/{{ octobercms_environment_config_path }}"
+    regexp: "('default'\\s*=>\\s*')(.*?)(',)"
+    replace: "\\1{{ octobercms_app_environment | default('\\2') }}\\3"
+  when: not octobercms_use_dotenv_config | bool

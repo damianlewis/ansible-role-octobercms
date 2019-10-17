@@ -2,6 +2,7 @@
 octobercms_app_config_path: config/app.php
 octobercms_cms_config_path: config/cms.php
 octobercms_database_config_path: config/database.php
+octobercms_environment_config_path: config/environment.php
 
 octobercms_installer_url: https://octobercms.com/api/installer
 octobercms_composer_package: october/october

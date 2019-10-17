@@ -6,6 +6,14 @@
     creates: "{{ octobercms_root_path }}/.env"
   register: octobercms_env_installed
 
+- name: Set APP_ENV variable
+  lineinfile:
+    path: "{{ octobercms_root_path }}/.env"
+    regexp: '^APP_ENV='
+    line: APP_ENV={{ octobercms_app_environment }}
+    insertbefore: BOF
+  when: octobercms_app_environment is defined
+
 - name: Configure .env file
   lineinfile:
     path: "{{ octobercms_root_path }}/.env"

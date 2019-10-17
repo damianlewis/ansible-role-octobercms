@@ -2,8 +2,6 @@
 - name: Configure database connection name and database for testing
   replace:
     path: "{{ octobercms_root_path }}/{{ octobercms_database_config_path }}"
-    # regexp: "('default'\\s*=>\\s*')(.*?)(',)"
-    # replace: "\\1{{ octobercms_database_connection | default('\\2') }}\\3"
     regexp: "(?P<start>'{{ item.key }}'\\s*=>\\s*'?)(?P<current_value>.*?)(?P<end>'?,)"
     replace: "\\g<start>{{ item.value }}\\g<end>"
   with_dict:

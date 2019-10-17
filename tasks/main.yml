@@ -17,7 +17,11 @@
 - include_tasks: build-from-composer.yml
   when: octobercms_build_from_composer | bool
 
-- include_tasks: composer-install.yml
+- name: Run composer install (this can take a while)
+  composer:
+    command: install
+    working_dir: "{{ octobercms_root_path }}"
+    no_dev: "{{ octobercms_composer_no_dev }}"
   when: octobercms_composer_install | bool
 
 - include_tasks: configure-app.yml

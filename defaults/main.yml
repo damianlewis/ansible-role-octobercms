@@ -18,7 +18,6 @@ octobercms_root_path: "{{ octobercms_deploy_path }}"
 octobercms_owner: "{{ ansible_ssh_user }}"
 octobercms_use_dotenv_config: no
 octobercms_use_config_for_testing: no
-octobercms_remove_demo: no
 
 # Application configuration settings
 octobercms_app_debug: no

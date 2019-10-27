@@ -72,7 +72,7 @@ octobercms_cms_edge_updates: no
 octobercms_cms_disable_core_updates: "{{ octobercms_build_from_composer | default(no) }}"
 octobercms_cms_enable_routes_cache: yes
 octobercms_cms_enable_assets_cache: yes
-octobercms_cms_database_templates: no
+octobercms_cms_database_templates: yes
 octobercms_cms_enable_csrf: yes
 octobercms_cms_active_theme: demo
 octobercms_cms_backend_uri: backend

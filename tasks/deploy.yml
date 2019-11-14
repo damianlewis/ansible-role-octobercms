@@ -20,7 +20,7 @@
     version: "{{ octobercms_deploy_version }}"
     accept_hostkey: true
     force: true
-    depth: "{{ octobercms_deploy_depth | default(omit) }}"
+    depth: "{{ octobercms_deploy_depth }}"
   register: octobercms_deploy_repo_installed
   notify: clear cache
   when:
@@ -34,7 +34,7 @@
     key_file: "{{ octobercms_ssh_key_path }}/{{ octobercms_deployment_key_name }}"
     accept_hostkey: true
     force: true
-    depth: "{{ octobercms_deploy_depth | default(omit) }}"
+    depth: "{{ octobercms_deploy_depth }}"
   register: octobercms_deploy_repo_installed
   notify: clear cache
   when:

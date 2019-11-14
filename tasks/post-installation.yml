@@ -6,6 +6,10 @@
   register: octobercms_migrate_database
   changed_when: '"Migration table created" in octobercms_migrate_database.stdout or "- v" in octobercms_migrate_database.stdout'
 
+# Install plugin dependencies
+- include_tasks: plugins-from-artisan.yml
+- include_tasks: plugins-from-git.yml
+
 - name: Configure the October scheduler
   cron:
     name: OctoberCMS scheduler

@@ -137,6 +137,32 @@ Additional October settings.
 - `octobercms_use_dotenv_config:boolean` - Set this to true to convert base configuration to DotEnv file.
 - `octobercms_use_config_for_testing:boolean` - Set this to true to use seperate database for testing. See [environment configuration](https://octobercms.com/docs/setup/configuration#environment-config) about configuring a test environment.
 
+```yaml
+octobercms_artisan_plugins: []
+octobercms_artisan_plugins_extra: []
+```
+Install Marketplace plugins using Artisan.
+- `octobercms_artisan_plugins:list` - Specifies the list of plugins in `AuthorName.PluginName` format to install.
+- `octobercms_artisan_plugins_extra:list` - Specifies the list of additional plugins in `AuthorName.PluginName` format to install.
+
+```yaml
+octobercms_plugins_path: "{{ octobercms_deploy_path }}/plugins"
+octobercms_git_plugins: []
+octobercms_git_plugins_extra: []
+```
+Install plugins using Git.
+- `octobercms_plugins_path:string` - Specifies the October plugins folder.
+- `octobercms_git_plugins:list` - Specifies the list of plugins to install using Git.
+- `octobercms_git_plugins_extra:list` - Specifies the list of additional plugins to install using Git.
+
+The following parameters are required:
+- `repo:string` - Specifies the URL of the repository.
+- `path:string` - Specifies where the repository will be cloned to.
+
+The following parameters are optional:
+- `version:string` - Specifies the version to install. Can be a branch or tag name. Defaults to master branch.
+- `depth:int` - Specifies the number of revisions to truncate the cloned repository. Defaults to 1.
+
 ## Dependencies
 None.
 

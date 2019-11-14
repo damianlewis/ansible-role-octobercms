@@ -48,3 +48,10 @@ octobercms_cms_enable_csrf: yes
 # octobercms_cms_active_theme: demo
 # octobercms_cms_backend_uri: backend
 # octobercms_cms_backend_timezone: UTC
+
+# Plugins to install
+octobercms_plugins_path: "{{ octobercms_deploy_path }}/plugins"
+octobercms_artisan_plugins: []
+octobercms_artisan_plugins_extra: []
+octobercms_git_plugins: []
+octobercms_git_plugins_extra: []

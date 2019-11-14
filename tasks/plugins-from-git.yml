@@ -1,0 +1,20 @@
+---
+- name: Install plugins using Git
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ octobercms_plugins_path }}/{{ item.path }}"
+    version: "{{ item.version | default('master') }}"
+    accept_hostkey: true
+    force: true
+    depth: "{{ item.depth | default(1) }}"
+  loop: "{{ octobercms_git_plugins }}"
+
+- name: Install additional plugins using Git
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ octobercms_plugins_path }}/{{ item.path }}"
+    version: "{{ item.version | default('master') }}"
+    accept_hostkey: true
+    force: true
+    depth: "{{ item.depth | default(1) }}"
+  loop: "{{ octobercms_git_plugins_extra }}"

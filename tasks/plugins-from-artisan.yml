@@ -1,0 +1,16 @@
+---
+- name: Install plugins using Artisan
+  command: php artisan plugin:install {{ item }}
+  args:
+    chdir: "{{ octobercms_root_path }}"
+  register: octobercms_install_plugins
+  changed_when: '"Nothing to update" not in octobercms_install_plugins.stdout'
+  loop: "{{ octobercms_artisan_plugins }}"
+
+- name: Install additional plugins using Artisan
+  command: php artisan plugin:install {{ item }}
+  args:
+    chdir: "{{ octobercms_root_path }}"
+  register: octobercms_install_extra_plugins
+  changed_when: '"Nothing to update" not in octobercms_install_extra_plugins.stdout'
+  loop: "{{ octobercms_artisan_plugins_extra }}"

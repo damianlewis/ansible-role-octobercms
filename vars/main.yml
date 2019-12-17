@@ -10,3 +10,5 @@ octobercms_composer_prefer_dist: yes
 
 octobercms_ssh_key_path: ~/.ssh
 octobercms_deployment_key_name: octobercms-identity-key
+
+octobercms_public_directory: public

@@ -15,6 +15,14 @@
     name: OctoberCMS scheduler
     job: php {{ octobercms_root_path }}/artisan schedule:run >> /dev/null 2>&1
 
+- name: Create public directory
+  command: php artisan october:mirror {{ octobercms_public_directory }}
+  args:
+    chdir: "{{ octobercms_root_path }}"
+  register: octobercms_mirror_public
+  changed_when: '"Mirror complete!" in octobercms_mirror_public.stdout'
+  when: octobercms_create_public_directory | bool
+
 - name: Ensure application has correct owner/group
   file:
     path: "{{ octobercms_deploy_path }}"

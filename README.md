@@ -132,10 +132,12 @@ Additional settings for configuring the database. (PostgreSQL)
 ```yaml
 octobercms_use_dotenv_config: no
 octobercms_use_config_for_testing: no
+octobercms_create_public_directory: no
 ```
 Additional October settings.
 - `octobercms_use_dotenv_config:boolean` - Set this to true to convert base configuration to DotEnv file.
 - `octobercms_use_config_for_testing:boolean` - Set this to true to use seperate database for testing. See [environment configuration](https://octobercms.com/docs/setup/configuration#environment-config) about configuring a test environment.
+- `octobercms_create_public_directory:boolean` - Set this to true to create a mirrored copy of the public files needed to serve the application. See [Using a public folder](https://octobercms.com/docs/setup/configuration#public-folder).
 
 ```yaml
 octobercms_artisan_plugins: []

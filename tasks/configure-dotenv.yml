@@ -32,6 +32,6 @@
   - db_password: "{{ octobercms_database_password | default('\\g<current_value>') }}"
   - db_use_config_for_testing: "{{ octobercms_use_config_for_testing | ternary('true', 'false') }}"
   - routes_cache: "{{ octobercms_cms_enable_routes_cache | ternary('true', 'false') }}"
-  - assets_cache: "{{ octobercms_cms_enable_assets_cache | ternary('true', 'false') }}"
+  - asset_cache: "{{ octobercms_cms_enable_assets_cache | ternary('true', 'false') }}"
   - database_templates: "{{ octobercms_cms_database_templates | ternary('true', 'false') }}"
   - enable_csrf: "{{ octobercms_cms_enable_csrf | ternary('true', 'false') }}"
